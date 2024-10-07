@@ -1,7 +1,8 @@
 import Paginate from "@/components/pagination/pagination";
 import useCartContext from "@/hooks/cart/use-cart-context";
-import { calculateTotalPages } from "@/utils/pagination";
-import { useState } from "react";
+import { ProductWithQuantity } from "@/types/cart/cart";
+import { calculateTotalPages, paginateProducts } from "@/utils/pagination";
+import { useMemo, useState } from "react";
 import { FaTrashAlt, FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -16,17 +17,21 @@ const Cart = () => {
       .toFixed(2);
   };
 
+  const paginatedProducts: Array<ProductWithQuantity> = useMemo(() => {
+    return paginateProducts(products, currentPage, 3) as ProductWithQuantity[];
+  }, [products, currentPage]);
+
   return (
     <div className="overflow-x-hidden">
       <h1 className="mt-12 lg:mt-16 text-4xl font-bold text-center mb-12">
         Your Shopping Cart
       </h1>
 
-      {products.length > 0 ? (
+      {paginatedProducts.length > 0 ? (
         <div className="flex flex-col lg:flex-row lg:space-x-12 gap-12 lg:gap-0">
           <div className="flex-grow space-y-6">
             <ul className="space-y-6 flex flex-col gap-2">
-              {products.map((item) => (
+              {paginatedProducts.map((item) => (
                 <li
                   key={item.id}
                   className="flex flex-col border border-gray-200 md:flex-row items-center p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 min-w-full md:min-w-[400px] xl:min-w-[600px]"

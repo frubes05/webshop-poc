@@ -1,10 +1,11 @@
+import { ProductWithQuantity } from "@/types/cart/cart";
 import { Product } from "@/types/home/home";
 
 export const paginateProducts = (
-  products: Array<Product>,
+  products: Array<Product> | Array<ProductWithQuantity>,
   page: number = 1,
   productsPerPage: number = 20
-): Array<Product> => {
+): Array<Product> | Array<ProductWithQuantity> => {
   const startIndex = (page - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
 
