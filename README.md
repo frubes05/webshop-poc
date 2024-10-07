@@ -5,5 +5,5 @@ This app does filtering, sorting, searching, pagination and tracks user cart act
 
 Currently, web app is hosted on vercel:
 
-- ((https://webshop-poc-tyxs.vercel.app/))
+- https://webshop-poc-tyxs.vercel.app/
 
